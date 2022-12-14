@@ -83,14 +83,6 @@ fn compare(lhs: &JsonValue, rhs: &JsonValue, depth: u8) -> Result {
     Result::NEXT
 }
 
-fn sorter(lhs: &JsonValue, rhs: &JsonValue) -> Ordering {
-    if compare(&lhs, &rhs, 0) != Result::FALSE {
-        return Ordering::Less;
-    } else {
-        return Ordering::Greater;
-    }
-}
-
 fn check_order(block: &str) -> bool {
     let mut lines = block.lines();
     let lhs = json::parse(lines.next().unwrap()).unwrap();
@@ -112,6 +104,14 @@ fn part1(input: &str) {
         count += 1;
     }
     println!("Part 1: {}", sum);
+}
+
+fn sorter(lhs: &JsonValue, rhs: &JsonValue) -> Ordering {
+    if compare(&lhs, &rhs, 0) != Result::FALSE {
+        return Ordering::Less;
+    } else {
+        return Ordering::Greater;
+    }
 }
 
 fn part2(input: &str) {
